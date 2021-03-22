@@ -33,7 +33,8 @@ void* handler(){
         float x = rand() % (BITS + 1) / (float)(BITS + 1);
         float y = rand() % (BITS + 1) / (float)(BITS + 1);
        
-        printf("x: %f, y:%f\n", x, y);
+        // debug
+        // printf("x: %f, y:%f\n", x, y);
 
         // lock to modify global 
         pthread_mutex_lock(&lock);
