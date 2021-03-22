@@ -11,20 +11,6 @@ long long m = 0, n = 0;
 int BITS = 99999;
 
 
-union FloatRand
-{
-    struct 
-    {
-        unsigned long Frac:23;
-        unsigned long Exp:8;
-        unsigned long Signed:1;
-    } BitArea;
-    float Value;
-    unsigned long Binary; /* for debug only */
-};
-
-
-
 void* handler(){
     int nums = N/thread_num;
     // calcuate probability N times
