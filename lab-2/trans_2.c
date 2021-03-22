@@ -9,9 +9,25 @@ int** matrix;
 pthread_mutex_t lock;
 
 void swap(int* a, int *b){
-    *a = *a^*b;
-    *b = *a^*b;
-    *a = *b^*a;
+    int c = *a;
+    *a = *b;
+    *b = c;
+}
+
+void trans(int id, int side){
+    int row_block = size/side;
+    int x = id % row_block;
+    int y = id / row_block;
+    int x_start = x*side;
+    int y_start = y*side;
+    int sym_id = x * side + y;
+    int sym_x_start = (sym_id%row_block)*side;
+    int sym_y_start = (sym_id/row_block)*side;
+    for (int i = 0; i < side; i++){
+        for (int j = 0; j < side; j++){
+            swap(&matrix[i+x_start][j+y_start], &matrix[sym_x_start+i][sym_y_start+j]);
+        }
+    }
 }
 
 void* child_trans(void* ID){
@@ -26,7 +42,7 @@ void* child_trans(void* ID){
 
     pthread_mutex_lock(&lock);
     for(int i = 0; i < side; i++){
-        for(int j = i; j < side; j++){
+        for(int j = i + 1; j < side; j++){
             swap(&matrix[i+x_start][j+y_start], &matrix[j+y_start][i+x_start]);
         }
     }
@@ -37,8 +53,8 @@ void* child_trans(void* ID){
 int main(){
     // cout<<"Please input size and thread_nums: \n";
     // cin>>size>>thread_nums;
-    size = 4;
-    thread_nums = 4;
+    size = 9;
+    thread_nums = 9;
     
      matrix = (int**)malloc(size*sizeof(int*));
     for (int i = 0; i < size; i++){
@@ -47,7 +63,7 @@ int main(){
 
     for (int i = 0; i < size; i++){
         for (int j = 0; j <size; j++){
-            matrix[i][j] = i*j;
+            matrix[i][j] = i;
             printf("%d ", matrix[i][j]);
         }
         printf("\n");
