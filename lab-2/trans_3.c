@@ -1,5 +1,8 @@
 #include <pthread.h>
 #include <math.h>
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
 
 int size, thread_nums;
 int** matrix;
@@ -15,7 +18,7 @@ void swap(int* a, int *b){
 void print_matrix(){
 
     for (int i = 0; i < size; i++){
-        for (int j = 0; j <size; j++){
+        for (int j = 0; j < size; j++){
             printf("%d ", matrix[i][j]);
         }
         printf("\n");
@@ -27,10 +30,28 @@ void print_matrix(){
 
 void* trans(void* ID){
 
+    int id = (int *)ID;
+    int piece = size/thread_nums;
+    int end = (id == thread_nums-1) ? size : id + piece;
+    int begin = id * piece;
+    for(int rank=begin; rank<end; rank++){
+    	for(int i=0; i<rank; i++){
+            // printf("rank: %d, i: %d\n", rank, i);
+	        swap(&matrix[rank][i], &matrix[i][rank]);
+    	}
+	}
+
 }
 
 int main(){
-    size = thread_nums = 9;
+
+    int m;
+    printf("Please enter a number: \n");
+    scanf("%d", &m);
+    size = m*m;
+    thread_nums = size;
+    // size = 10;
+    // thread_nums = 2;
 
     int MAX_ROW , MAX_COL, side;
     side = MAX_ROW = MAX_COL = (int)sqrt((size*size)/thread_nums);
@@ -50,7 +71,6 @@ int main(){
     // print init matrix
     print_matrix();
 
-    printf("\n");
 
     pthread_t* threads  = (pthread_t*)malloc(sizeof(pthread_t*) * thread_nums);
 
