@@ -29,7 +29,6 @@ void print_matrix(){
 
 
 void trans(int id, int side){
-    printf("Enter trans\n");
     int row_block = size/side;
     int x = id % row_block;
     int y = id / row_block;
@@ -41,7 +40,7 @@ void trans(int id, int side){
     for (int i = 0; i < side; i++){
         for (int j = 0; j < side; j++){
             // debug for swap
-            printf("swap: (%d, %d),  (%d, %d)\n", i+x_start, j+y_start, j+x_start, i+y_start);
+            // printf("swap: (%d, %d),  (%d, %d)\n", i+x_start, j+y_start, j+x_start, i+y_start);
             swap(&matrix[i+x_start][j+y_start], &matrix[sym_x_start+i][sym_y_start+j]);
         }
     }
@@ -71,8 +70,13 @@ void* child_trans(void* ID){
 
 
 int main(){
-    size = 4;
-    thread_nums = 4;
+    // size = 9;
+    // thread_nums = 9;
+    int m;
+    printf("Please enter a number: \n");
+    scanf("%d", &m);
+    size = m*m;
+    thread_nums = size;
     int MAX_ROW , MAX_COL, side;
     side = MAX_ROW = MAX_COL = (int)sqrt((size*size)/thread_nums);
     
