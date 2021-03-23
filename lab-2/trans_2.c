@@ -40,7 +40,7 @@ void trans(int id, int side){
     for (int i = 0; i < side; i++){
         for (int j = 0; j < side; j++){
             // debug for swap
-            // printf("swap: (%d, %d),  (%d, %d)\n", i+x_start, j+y_start, j+x_start, i+y_start);
+            // printf("swap: (%d, %d),  (%d, %d)\n", i+x_start, j+y_start, sym_x_start+i, sym_y_start+j);
             swap(&matrix[i+x_start][j+y_start], &matrix[sym_x_start+i][sym_y_start+j]);
         }
     }
@@ -92,13 +92,10 @@ int main(){
         }
     }
 
-    printf("\n");
 
     // print init matrix
     print_matrix();
 
-    printf("\n");
-    
     pthread_t* threads  = (pthread_t*)malloc(sizeof(pthread_t*) * thread_nums);
 
     for (int i = 0; i < thread_nums; i++){
@@ -116,7 +113,8 @@ int main(){
     printf("MAX_ROW: %d, MAX_COL: %d\n", MAX_ROW, MAX_COL);
     for(int row = 0; row<MAX_ROW; row++){
         for(int col = row+1; col<MAX_ROW; col++){
-            int id = row*3 + col;
+            int id = row*MAX_ROW + col;
+            printf("trans ID: %d\n", id);
             trans(id, side);
         }
     }
