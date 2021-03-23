@@ -3,6 +3,27 @@
 
 int size, thread_nums;
 int** matrix;
+pthread_mutex_t lock;
+
+
+void swap(int* a, int *b){
+    *a=*a^*b;
+    *b=*a^*b;
+    *a=*b^*a;
+}
+
+void print_matrix(){
+
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j <size; j++){
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+}
+
 
 void* trans(void* ID){
 
