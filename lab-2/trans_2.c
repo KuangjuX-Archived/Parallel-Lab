@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <math.h>
+#include <string.h>
 
 
 int size, thread_nums;
@@ -69,12 +70,18 @@ void* child_trans(void* ID){
 }
 
 
-int main(){
+int main(int args, char* argc[]){
     // size = 9;
     // thread_nums = 9;
-    int m;
-    printf("Please enter a number: \n");
-    scanf("%d", &m);
+    // int m;
+    // printf("Please enter a number: \n");
+    // scanf("%d", &m);
+    if (args < 1){
+        printf("Expected Arguments");
+        return -1;
+    }
+
+    int m = atoi(argc[0]);
     size = m*m;
     thread_nums = size;
     int MAX_ROW , MAX_COL, side;

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
+#include <string.h>
 
 int size, thread_nums;
 int** matrix;
@@ -30,7 +31,7 @@ void print_matrix(){
 
 void* trans(void* ID){
 
-    int id = (int *)ID;
+    int id = (int)ID;
     int piece = size/thread_nums;
     int end = (id == thread_nums-1) ? size : id + piece;
     int begin = id * piece;
@@ -43,15 +44,15 @@ void* trans(void* ID){
 
 }
 
-int main(){
+int main(int args, char* argc[]){
 
-    int m;
-    printf("Please enter a number: \n");
-    scanf("%d", &m);
-    size = m*m;
-    thread_nums = size;
-    // size = 10;
-    // thread_nums = 2;
+    if(args < 2){
+        printf("Expected Arguments");
+        return -1;
+    }
+
+    size = atoi(argc[0]);
+    thread_nums = atoi(argc[1]);
 
     int MAX_ROW , MAX_COL, side;
     side = MAX_ROW = MAX_COL = (int)sqrt((size*size)/thread_nums);

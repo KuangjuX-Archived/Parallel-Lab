@@ -3,6 +3,7 @@
 #include <malloc.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 pthread_mutex_t lock;
 long long N, thread_num;
@@ -32,10 +33,16 @@ void* handler(){
 
 }
 
-int main(){
+int main(int args, char* argc[]){
+    if (args < 2){
+        printf("Expected Arguments");
+        return -1;
+    }
     pi = 0;
-    printf("Please enter N and Thread Nums: \n");
-    scanf("%lld %lld",&N, &thread_num);
+    // printf("Please enter N and Thread Nums: \n");
+    // scanf("%lld %lld",&N, &thread_num);
+    N = atoi(argc[0]);
+    thread_num = atoi(argc[1]);
 
     pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t*) * thread_num);
 

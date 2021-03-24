@@ -25,7 +25,7 @@ void* handler(void* ID){
     for (int i = start + 1; i <= end; i++){
         // lock to calculate global varibal pi
         int bit = i%2?1:-1;
-        printf("i: %d, bit: %d, num:%f \n", i, bit, bit*(1.0/(2*i-1)));
+        // printf("i: %d, bit: %d, num:%f \n", i, bit, bit*(1.0/(2*i-1)));
         pthread_mutex_lock(&lock);
         pi += bit*(1.0/(2*i-1));
         pthread_mutex_unlock(&lock);
