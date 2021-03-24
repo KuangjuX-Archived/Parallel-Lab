@@ -1,0 +1,10 @@
+#!/bin/bash -l        
+#PBS -N pi_1
+#PBS -q qstudent
+#PBS -l nodes=2:ppn=8
+#PBS -j oe
+cd $PBS_O_WORKDIR
+procs=$(cat $PBS_NODEFILE | wc -l)
+date +%s.%N
+./pi_1 100000000 10000 $procs
+date +%s.%N

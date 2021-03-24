@@ -3,6 +3,8 @@
 #include <malloc.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
+
 
 pthread_mutex_t lock;
 long long N, thread_num;
@@ -20,14 +22,13 @@ void* handler(void* ID){
     // calculate count range in this thread
     int start = nums*id;
     int end  = nums*(id+1);
-    // debug
-    printf("start: %d, end: %d\n", start, end);
+   
     for (int i = start + 1; i <= end; i++){
-        // lock to calculate global varibal pi
         int bit = i%2?1:-1;
-        // printf("i: %d, bit: %d, num:%f \n", i, bit, bit*(1.0/(2*i-1)));
+        // lock to calculate global varibal pi
         pthread_mutex_lock(&lock);
         pi += bit*(1.0/(2*i-1));
+        // Unlock
         pthread_mutex_unlock(&lock);
 
     }
@@ -35,10 +36,15 @@ void* handler(void* ID){
     
 }
 
-int main(){
+int main(int args, char* argc[]){
     pi = 0;
-    printf("Please enter N and Thread Nums: \n");
-    scanf("%lld %lld",&N, &thread_num);
+    if (args < 2){
+        printf("Expected Arguments");
+        return -1;
+    }
+
+    int N = atoi(argc[1]);
+    int thread_num = atoi(argc[2]);
 
     pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t*) * thread_num);
 

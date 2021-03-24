@@ -51,8 +51,8 @@ int main(int args, char* argc[]){
         return -1;
     }
 
-    size = atoi(argc[0]);
-    thread_nums = atoi(argc[1]);
+    size = atoi(argc[1]);
+    thread_nums = atoi(argc[2]);
 
     int MAX_ROW , MAX_COL, side;
     side = MAX_ROW = MAX_COL = (int)sqrt((size*size)/thread_nums);

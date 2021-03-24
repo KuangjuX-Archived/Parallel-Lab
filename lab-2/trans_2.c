@@ -70,18 +70,19 @@ void* child_trans(void* ID){
 }
 
 
-int main(int args, char* argc[]){
+int main(int argc, char* argv[]){
     // size = 9;
     // thread_nums = 9;
     // int m;
     // printf("Please enter a number: \n");
     // scanf("%d", &m);
-    if (args < 1){
+    if (argc < 1){
         printf("Expected Arguments");
         return -1;
     }
 
-    int m = atoi(argc[0]);
+    int m = atoi(argv[1]);
+    printf("m :%d\n", m);
     size = m*m;
     thread_nums = size;
     int MAX_ROW , MAX_COL, side;

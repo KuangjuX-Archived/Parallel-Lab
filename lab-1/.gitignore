@@ -3,6 +3,15 @@
 !pi_1.c
 !pi_2.c
 !pi_3.c
+!pi_1_fuck.c
+!pi_2_fuck.c
+!pi_3_fuck.c
+!pi_1.pbs
+!pi_2.pbs
+!pi_3.pbs
+!pi_1_fuck.pbs
+!pi_2_fuck.pbs
+!pi_3_fuck.pbs
 !.gitignore
 !Makefile
 !README.md
