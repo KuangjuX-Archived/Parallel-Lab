@@ -43,8 +43,8 @@ int main(int args, char* argc[]){
         return -1;
     }
 
-    int N = atoi(argc[1]);
-    int thread_num = atoi(argc[2]);
+    N = atoi(argc[1]);
+    thread_num = atoi(argc[2]);
 
     pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t*) * thread_num);
 

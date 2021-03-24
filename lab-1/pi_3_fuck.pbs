@@ -8,3 +8,4 @@ procs=$(cat $PBS_NODEFILE | wc -l)
 date +%s.%N
 ./pi_3_fuck 100000000
 date +%s.%N
+
