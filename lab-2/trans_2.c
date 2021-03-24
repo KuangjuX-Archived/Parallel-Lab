@@ -71,18 +71,12 @@ void* child_trans(void* ID){
 
 
 int main(int argc, char* argv[]){
-    // size = 9;
-    // thread_nums = 9;
-    // int m;
-    // printf("Please enter a number: \n");
-    // scanf("%d", &m);
     if (argc < 1){
         printf("Expected Arguments");
         return -1;
     }
 
     int m = atoi(argv[1]);
-    printf("m :%d\n", m);
     size = m*m;
     thread_nums = size;
     int MAX_ROW , MAX_COL, side;
@@ -102,7 +96,7 @@ int main(int argc, char* argv[]){
 
 
     // print init matrix
-    print_matrix();
+    // print_matrix();
 
     pthread_t* threads  = (pthread_t*)malloc(sizeof(pthread_t*) * thread_nums);
 
@@ -115,20 +109,18 @@ int main(int argc, char* argv[]){
     }
 
     // print child matrix
-    print_matrix();
+    // print_matrix();
 
     // local transpose
-    printf("MAX_ROW: %d, MAX_COL: %d\n", MAX_ROW, MAX_COL);
     for(int row = 0; row<MAX_ROW; row++){
         for(int col = row+1; col<MAX_ROW; col++){
             int id = row*MAX_ROW + col;
-            printf("trans ID: %d\n", id);
             trans(id, side);
         }
     }
 
     // print matrix trans result
-    print_matrix();
+    // print_matrix();
     
 
 }

@@ -1,0 +1,1 @@
+gcc -o trans_3 trans_3.c -lpthread -lm -std=c11

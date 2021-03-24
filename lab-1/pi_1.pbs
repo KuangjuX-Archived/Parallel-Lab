@@ -6,5 +6,5 @@
 cd $PBS_O_WORKDIR
 procs=$(cat $PBS_NODEFILE | wc -l)
 date +%s.%N
-./pi_1 100000000 10000 $procs
+./pi_1 100000000 $procs
 date +%s.%N

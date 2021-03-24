@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int size;
 int **matrix;
@@ -23,9 +24,13 @@ void print_matrix(){
 }
 
 
-int main(){
-    printf("Please enter the size of matrix:");
-    scanf("%d", &size);
+int main(int args, char* argc[]){
+    if (args < 1){
+        printf("Expected Arguments.\n");
+        return -1;
+    }
+
+    size = atoi(argc[1]);
 
     // alloc heap memory for matrix
     matrix = (int**)malloc(size*sizeof(int*));
@@ -40,7 +45,7 @@ int main(){
         }
     }
 
-    print_matrix();
+    // print_matrix();
 
     for (int i = 0; i < size; i++){
         for(int j = i+1; j < size; j++){
@@ -48,6 +53,6 @@ int main(){
         }
     }
 
-    print_matrix();
+    // print_matrix();
 
 }

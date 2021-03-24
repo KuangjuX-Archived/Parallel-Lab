@@ -1,0 +1,1 @@
+gcc -o trans_1 trans_1.c -std=c11
