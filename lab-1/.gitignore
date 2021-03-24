@@ -13,5 +13,11 @@
 !pi_2_fuck.pbs
 !pi_3_fuck.pbs
 !.gitignore
+!pi_1.sh
+!pi_2.sh
+!pi_3.sh
+!pi_1_fuck.sh
+!pi_2_fuck.sh
+!pi_3_fuck.sh
 !Makefile
 !README.md

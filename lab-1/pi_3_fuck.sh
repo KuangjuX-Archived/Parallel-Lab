@@ -1,0 +1,1 @@
+gcc -o pi_3_fuck pi_3_fuck.c -lpthread -std=c11

@@ -1,0 +1,1 @@
+gcc -o pi_1_fuck pi_1_fuck.c -std=c11
