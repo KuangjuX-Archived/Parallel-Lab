@@ -9,6 +9,11 @@ int size, thread_nums;
 int** matrix;
 pthread_mutex_t lock;
 
+struct params{
+    int id;
+    int side;
+};
+
 void swap(int* a, int *b){
     *a=*a^*b;
     *b=*a^*b;
@@ -29,7 +34,11 @@ void print_matrix(){
 }
 
 
-void trans(int id, int side){
+void* trans(void* args){
+    struct params *recv;
+    recv = (struct params*)args;
+    int id = recv->id;
+    int side = recv->side;
     int row_block = size/side;
     int x = id % row_block;
     int y = id / row_block;
@@ -108,19 +117,31 @@ int main(int argc, char* argv[]){
         pthread_join(threads[i], NULL);
     }
 
+    free(threads);
+
     // print child matrix
     // print_matrix();
-
+    int nums = m*(m-1)/2;
+    pthread_t* threads_2 = (pthread_t*)malloc(sizeof(pthread_t*) * nums);
     // local transpose
+    int count = 0;
     for(int row = 0; row<MAX_ROW; row++){
         for(int col = row+1; col<MAX_ROW; col++){
             int id = row*MAX_ROW + col;
-            trans(id, side);
+            struct params arg;
+            arg.id = id;
+            arg.side = side;
+            pthread_create(&threads_2[count], NULL, trans, &arg);
+            count++;
         }
+    }
+
+    for (int i = 0; i < nums; i++){
+        pthread_join(threads_2[i], NULL);
     }
 
     // print matrix trans result
     // print_matrix();
-    
+    return 0;
 
 }

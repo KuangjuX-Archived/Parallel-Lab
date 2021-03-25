@@ -8,3 +8,4 @@ procs=$(cat $PBS_NODEFILE | wc -l)
 date +%s.%N
 ./trans_2 100 100
 date +%s.%N
+
