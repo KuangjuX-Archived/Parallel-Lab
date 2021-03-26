@@ -7,7 +7,6 @@
 
 int size, thread_nums;
 int** matrix;
-pthread_mutex_t lock;
 
 struct params{
     int id;
@@ -66,7 +65,6 @@ void* child_trans(void* ID){
     int y_start = (id/row_block)*side;
     int y_end = y_start + side -1;
 
-    pthread_mutex_lock(&lock);
     for(int i = 0; i < side; i++){
         for(int j = i + 1; j < side; j++){
             // debug for swap 
@@ -74,7 +72,6 @@ void* child_trans(void* ID){
             swap(&matrix[i+x_start][j+y_start], &matrix[j+x_start][i+y_start]);
         }
     }
-    pthread_mutex_unlock(&lock);
 
 }
 
