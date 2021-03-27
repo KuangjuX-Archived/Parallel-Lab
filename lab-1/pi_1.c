@@ -17,12 +17,16 @@ void *thread_compute(void* ID){
     int start,end;
     start = id*length;
     end = (id+1)*length;
+
+    long double count = 0;
+    for(int i = start+1; i <= end; i++){
+        count += (4/((1+((i+0.5)/n)*((i+0.5)/n))))*(1.0/n);
+    }
+
+    // lock to add count to pi
     pthread_mutex_lock(&lock);
     
-    int i;
-    for(i=start+1;i<=end;i++){
-        pi += (4/((1+((i+0.5)/n)*((i+0.5)/n))))*(1.0/n);
-    }
+    pi += count;
 
     pthread_mutex_unlock(&lock);
 }

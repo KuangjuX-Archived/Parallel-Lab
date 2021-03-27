@@ -22,16 +22,17 @@ void* handler(void* ID){
     // calculate count range in this thread
     int start = nums*id;
     int end  = nums*(id+1);
+
+    long double count  = 0;
    
     for (int i = start + 1; i <= end; i++){
         int bit = i%2?1:-1;
-        // lock to calculate global varibal pi
-        pthread_mutex_lock(&lock);
-        pi += bit*(1.0/(2*i-1));
-        // Unlock
-        pthread_mutex_unlock(&lock);
-
+        count += bit*(1.0/(2*i-1));
     }
+
+    pthread_mutex_lock(&lock);
+    pi += count;
+    pthread_mutex_unlock(&lock);
 
     
 }

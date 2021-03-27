@@ -15,18 +15,22 @@ int BITS = 99999;
 void* handler(){
     int nums = N/thread_num;
     // calcuate probability N times
+    int local_n = 0;
+    int local_m = 0;
     srand(time(NULL));
     for (int i = 0; i < nums; i++){
         float x = rand() % (BITS + 1) / (float)(BITS + 1);
         float y = rand() % (BITS + 1) / (float)(BITS + 1);
-
-        // lock
-        pthread_mutex_lock(&lock);
-        n++;
-        if (x*x + y*y <= 1)m++;
-        // unlock 
-        pthread_mutex_unlock(&lock);
+        local_n++;
+        if (x*x + y*y <= 1)local_m++;
     }
+
+    // lock
+    pthread_mutex_lock(&lock);
+    n += local_n;
+    m += local_m;
+    // unlock
+    pthread_mutex_unlock(&lock);
 
 }
 
