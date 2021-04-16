@@ -1,0 +1,5 @@
+*
+!build.sh
+!mpi_trans.c
+!Makefile
+!.gitignore
