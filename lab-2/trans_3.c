@@ -33,8 +33,8 @@ void* trans(void* ID){
 
     int id = (int)ID;
     int piece = size/thread_nums;
-    int end = (id == thread_nums-1) ? size : id + piece;
     int begin = id * piece;
+    int end = (id == thread_nums-1) ? size : begin + piece;
     for(int rank = begin; rank < end; rank++){
     	for(int i=0; i<rank; i++){
 	        swap(&matrix[rank][i], &matrix[i][rank]);
@@ -69,7 +69,8 @@ int main(int args, char* argc[]){
     }
 
     // print init matrix
-    // print_matrix();
+    print_matrix();
+
 
 
     pthread_t* threads  = (pthread_t*)malloc(sizeof(pthread_t*) * thread_nums);
@@ -83,6 +84,6 @@ int main(int args, char* argc[]){
     }
 
     // print child matrix
-    // print_matrix();
+    print_matrix();
 
 }
