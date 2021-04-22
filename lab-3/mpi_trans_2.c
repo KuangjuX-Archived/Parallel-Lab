@@ -106,6 +106,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}else {
+		// print();
 		int rec_size = 0;
 		int begin = my_rank * piece;
 		int end = (my_rank == group_size-1) ? group_size : begin + piece;

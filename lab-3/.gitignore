@@ -2,5 +2,9 @@
 !build.sh
 !mpi_trans_1.c
 !mpi_trans_2.c
+!trans.c
+!mpi_trans_1.pbs
+!mpi_trans_2.pbs
+!trans.pbs
 !Makefile
 !.gitignore

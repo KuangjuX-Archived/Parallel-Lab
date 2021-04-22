@@ -1,0 +1,14 @@
+#!/bin/bash -l        
+#PBS -N trans_1
+#PBS -q qstudent
+#PBS -l nodes=2:ppn=8
+#PBS -j oe
+
+procs = 10
+matrix = 10000
+exec = trans
+
+cd $PBS_O_WORKDIR
+date +%s.%N
+./trans ${matrix}
+date +%s.%N

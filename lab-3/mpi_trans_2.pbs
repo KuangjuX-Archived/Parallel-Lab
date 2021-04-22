@@ -1,0 +1,14 @@
+#!/bin/bash -l        
+#PBS -N trans_2
+#PBS -q qstudent
+#PBS -l nodes=2:ppn=8
+#PBS -j oe
+
+matrix = 10000;
+procs = 10;
+exec = ./mpi_trans_2
+
+cd $PBS_O_WORKDIR
+date +%s.%N 
+mpirun -np ${procs} ${exec} ${matrix}
+date +%s.%N 

@@ -61,12 +61,12 @@ int main(int argc, char *argv[]){
 
 	length = n/sqrt_group_size;
 	tmp = (int *)malloc(sizeof(int)*length*length);
+
 	if(my_rank == 0){
 		init();
 		getValue();
 		// print();
    		t_start = MPI_Wtime();
-		//这两层循环是找到对应编号的子块
 		for(int i=0;i<sqrt_group_size;i++){
 			for(int j=0;j<sqrt_group_size;j++){
 				int point = 0;
@@ -120,11 +120,10 @@ int main(int argc, char *argv[]){
         t_end = MPI_Wtime();
         printf("Matrix order:%d, Time cost:%lf\n",n,t_end-t_start);
 
-        // print();
-
         free(matrix);
     }
-    free(tmp);
+
+    // free(tmp);
 	MPI_Finalize();
 	return 0;
 }
