@@ -18,7 +18,7 @@ all = ${EXECS_1} ${EXECS_2}
 .PHONY: build_1 run_1 build_2 run_2 trans clean
 
 trans:
-	${CC} -o ${TRANS_EXEC} ${TRANS} -std=c11
+	@${CC} -o ${TRANS_EXEC} ${TRANS} -std=c11
 
 build_1:
 	@${MPICC} -o ${EXECS_1} ${SOURCE_1} -lm
