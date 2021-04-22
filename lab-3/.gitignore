@@ -1,5 +1,6 @@
 *
 !build.sh
-!mpi_trans.c
+!mpi_trans_1.c
+!mpi_trans_2.c
 !Makefile
 !.gitignore
